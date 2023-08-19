@@ -1,0 +1,54 @@
+﻿<Window x:Class="TimeSyncer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TimeSyncer"
+        mc:Ignorable="d"
+        Title="Time Syncer for Photos" Height="600" Width="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical">
+            <Button x:Name="button1" Tag="{Binding ElementName=textBlock1}" Content="Select Folder 1" Click="SelectFolderButtonClicked" Margin="0,4,0,0"/>
+            <Button x:Name="button2" Tag="{Binding ElementName=textBlock2}" Content="Select Folder 2" Click="SelectFolderButtonClicked" Margin="0,4,0,0"/>
+            <Button x:Name="button3" Tag="{Binding ElementName=textBlock3}" Content="Select Folder 3" Click="SelectFolderButtonClicked" Margin="0,4,0,0"/>
+            <Button x:Name="button4" Tag="{Binding ElementName=textBlock4}" Content="Select Folder 4" Click="SelectFolderButtonClicked" Margin="0,4,0,0"/>
+            <Button x:Name="button5" Tag="{Binding ElementName=textBlock5}" Content="Select Folder 5" Click="SelectFolderButtonClicked" Margin="0,4,0,0"/>
+            <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="TextBlock" MouseLeftButtonDown="PathTextBlockMouseLeftButtonDown" Foreground="Red" Margin="0,4,0,0"/>
+            <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text="TextBlock" MouseLeftButtonDown="PathTextBlockMouseLeftButtonDown" Foreground="Green" Margin="0,4,0,0"/>
+            <TextBlock x:Name="textBlock3" TextWrapping="Wrap" Text="TextBlock" MouseLeftButtonDown="PathTextBlockMouseLeftButtonDown" Foreground="Blue" Margin="0,4,0,0"/>
+            <TextBlock x:Name="textBlock4" TextWrapping="Wrap" Text="TextBlock" MouseLeftButtonDown="PathTextBlockMouseLeftButtonDown" Foreground="Brown" Margin="0,4,0,0"/>
+            <TextBlock x:Name="textBlock5" TextWrapping="Wrap" Text="TextBlock" MouseLeftButtonDown="PathTextBlockMouseLeftButtonDown" Foreground="Orange" Margin="0,4,0,0"/>
+            <TextBox x:Name="tb1" Foreground="Red" Margin="0,4,0,0"/>
+            <TextBox x:Name="tb2" Foreground="Green" Margin="0,4,0,0"/>
+            <TextBox x:Name="tb3" Foreground="Blue" Margin="0,4,0,0"/>
+            <TextBox x:Name="tb4" Foreground="Brown" Margin="0,4,0,0"/>
+            <TextBox x:Name="tb5" Foreground="Orange" Margin="0,4,0,0"/>
+            <Button x:Name="buttonRefresh" Content="Refresh" Click="buttonRefreshClicked" Margin="0,4,0,0"/>
+            <Button x:Name="buttonModify" Content="SetModifiedDatesUsingOffset" Click="buttonModifyClicked" Margin="0,50,0,0" Background="#FFE06666"/>
+            <Button x:Name="buttonSave" Content="Save Session" Margin="0,15,0,0" HorizontalAlignment="Left" Width="200" Click="buttonSave_Click"/>
+            <Button x:Name="buttonLoad" Content="Load Session" Margin="0,15,0,0" HorizontalAlignment="Left" Width="200" Click="buttonLoad_Click"/>
+        </StackPanel>
+        <ListBox x:Name="listBox"  ItemsSource="{Binding Path=Images}"  HorizontalAlignment="Stretch"   VerticalAlignment="Stretch"  Grid.Column="1" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="5" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Background="Gray" BorderBrush="{Binding Path=BorderBrushh}" BorderThickness="5" Height="90" Grid.Column="0">
+                            <Image Stretch="Uniform" Source="{Binding Path=Thumbnail, Mode=OneTime, IsAsync=True}"/>
+                            <!--<Image Stretch="Uniform"/>-->
+                        </Border>
+                        <TextBlock Text="{Binding Path=MediaUrl}" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="{Binding Path=DateTaken}" VerticalAlignment="Bottom" Grid.Column="1"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>
